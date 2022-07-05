@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Movie from "./Movie";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -13,12 +14,27 @@ function App() {
     setMovies(json.results);
     setLoading(false);
   };
-
+  console.log(movies);
   useEffect(() => {
     getMovies();
   }, []);
 
-  return <div>{loading ? <h1>hddi</h1> : null}</div>;
+  return (
+    <div>
+      <div>
+        {loading ? (
+          <h1>LOADING...</h1>
+        ) : (
+          <div>
+            {movies.map((item) => (
+              <Movie item={item} />
+            ))}
+          </div>
+        )}
+      </div>
+      ;
+    </div>
+  );
 }
 
 export default App;
